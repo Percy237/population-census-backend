@@ -2,6 +2,7 @@ import express, { response } from "express";
 import { PORT } from "./config.js";
 import { mongooseConnection } from "./config.js";
 import userRouter from "./routes/userRoute.js";
+import adminRouter from "./routes/adminRoute.js";
 
 import cors from "cors";
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/user", userRouter);
+app.use("/", adminRouter);
 
 mongooseConnection();
 
