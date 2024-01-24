@@ -1,7 +1,6 @@
 import express from "express";
 const router = express.Router();
 import { Admin } from "../models/adminModel.js";
-import bcrypt from "bcrypt";
 
 router.post("/signup", async (req, res) => {
   try {
@@ -20,7 +19,7 @@ router.post("/signup", async (req, res) => {
     const newAdmin = new Admin({
       name,
       email,
-      password: hashedPassword,
+      password,
     });
 
     await newAdmin.save();
