@@ -1,7 +1,7 @@
 export const PORT = 5555;
 
 import mongoose from "mongoose";
-const mongoAtlasUri = `mongodb://127.0.0.1:27017/census`;
+const mongoAtlasUri = `mongodb+srv://percylinkwe:tsembompercy18.@cluster0.befbqgf.mongodb.net/census`;
 export function mongooseConnection() {
   try {
     mongoose.connect(mongoAtlasUri, {
