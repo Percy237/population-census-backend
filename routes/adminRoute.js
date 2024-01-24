@@ -9,17 +9,14 @@ router.post("/signup", async (req, res) => {
     // Check if username already exists
     const existingAdmin = await Admin.findOne({ email });
     if (existingAdmin) {
-      return res.status(400).json({ message: "email already exists" });
+      return res.status(400).json({ message: "Email already exists" });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create a new admin
+    // Create a new admin without hashing the password
     const newAdmin = new Admin({
       name,
       email,
-      password,
+      password, // Note: Storing plain text password
     });
 
     await newAdmin.save();
@@ -39,9 +36,8 @@ router.post("/login", async (req, res) => {
       return res.status(404).json({ message: "Admin not found" });
     }
 
-    // Compare the password
-    const passwordMatch = await bcrypt.compare(password, admin.password);
-    if (!passwordMatch) {
+    // Compare the password without hashing (not recommended)
+    if (password !== admin.password) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
